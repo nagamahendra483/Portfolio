@@ -1,36 +1,47 @@
+import Button from 'react-bootstrap/Button';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./Contact.css";
-import { Form, Button } from "react-bootstrap"
 const Contact = () => {
-
+    const onSubmit = (e) => {
+        e.preventDefault();
+        showToast();
+    };
+    const showToast = () => {
+        toast("Backend Not Implemeted");
+    };
     return (
-    <div style={{ width: "40%", height: "50%", marginLeft: "30%", marginTop: "5%" }}>
-        <Form>
-            <Form.Group controlId="firstName">
-                <Form.Label>First Name</Form.Label>
-                <Form.Control type="text" placeholder="First Name" />
-            </Form.Group><Form.Group controlId="lastname">
-                <Form.Label>Last Name</Form.Label>
-                <Form.Control type="text" placeholder="Last Name" />
-            </Form.Group>
-            <Form.Group controlId="email">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Email" />
-            </Form.Group>
-
-            <Form.Group controlId="subject">
-                <Form.Label>Subject</Form.Label>
-                <Form.Control type="text" placeholder="Subject" />
-            </Form.Group>
-            <Form.Group controlId="message">
-                <Form.Label>Message</Form.Label>
-                <Form.Control type="textarea" placeholder="Message" />
-            </Form.Group>
-
-            <Button variant="primary" type="submit">
-                Send
-            </Button>
-        </Form>
-    </div>);
+        <div style={{ width: "40%", height: "50%", marginLeft: "30%", marginTop: "5%" }}>
+            <ToastContainer position="top-center" />
+            <form onSubmit={onSubmit}>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="Enter Name" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="Enter Email" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Subject</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="Enter Subject" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Message</label>
+                    <div class="col-sm-10">
+                        <textarea type="text" class="form-control" placeholder="Enter Message" />
+                    </div>
+                </div>
+                <Button type="submit" variant="primary" size="sm">Send Mail</Button>
+            </form>
+        </div>
+    );
 }
 
 export default Contact;

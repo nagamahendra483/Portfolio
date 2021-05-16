@@ -7,7 +7,7 @@ import "./HomePage.css"
 const HomePage = () => {
     return (
         <div>
-            <div className="homepageDiv" style={{ textAlign: "center"}}>
+            <div className="homepageDiv" style={{ textAlign: "center", padding:"2px 2px"}}>
                 <img src={logo} alt="Image Not Found" style={{ width: "15%", height: "15%",borderRadius: "50%" }}></img>
                 <h3>{homePageData.name}</h3>
                 <h5>{homePageData.role}</h5>
