@@ -14,7 +14,6 @@ function App() {
   return (
     <div>
       <Router>
-        <div>
           <div style={{ paddingTop: "5px", display: "flex", justifyContent: "flex-end" }}>
             <Link className="mr-3" to="/about">About</Link>
             <Link className="mr-3" to="/projects" >Projects</Link>
@@ -23,6 +22,9 @@ function App() {
 
           <Switch>
             <Route exact path="/">
+              <Redirect to="/about" />
+            </Route>
+            <Route exact path="/Portfolio">
               <Redirect to="/about" />
             </Route>
             <Route path="/about">
@@ -35,7 +37,6 @@ function App() {
               <Contact />
             </Route>
           </Switch>
-        </div>
       </Router>
     </div>
   );

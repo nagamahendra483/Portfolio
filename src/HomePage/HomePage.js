@@ -2,11 +2,12 @@ import { FaGithub, FaInstagram, FaTwitter, FaLinkedin } from "react-icons/fa";
 import * as homePageData from "../data/homePage.json";
 import { Nav, NavLink } from 'react-bootstrap';
 import logo from "../images/image.jpg";
+import "./HomePage.css"
 
 const HomePage = () => {
     return (
         <div>
-            <div className="mt-5" style={{ textAlign: "center"}}>
+            <div className="homepageDiv" style={{ textAlign: "center"}}>
                 <img src={logo} alt="Image Not Found" style={{ width: "15%", height: "15%",borderRadius: "50%" }}></img>
                 <h3>{homePageData.name}</h3>
                 <h5>{homePageData.role}</h5>

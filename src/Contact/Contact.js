@@ -3,7 +3,6 @@ import { Form, Button } from "react-bootstrap"
 const Contact = () => {
 
     return (
-    // <h2 style={{textAlign:"center"}}>Contact Page Yet To Develop</h2>
     <div style={{ width: "40%", height: "50%", marginLeft: "30%", marginTop: "5%" }}>
         <Form>
             <Form.Group controlId="firstName">
