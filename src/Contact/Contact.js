@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { ToastContainer, toast } from 'react-toastify';
+import * as emailData from "../data/homePage.json";
 import 'react-toastify/dist/ReactToastify.css';
-import * as emailjs from "emailjs-com";
 import "./Contact.css";
 const Contact = () => {
     const defaultEmail = {
@@ -12,32 +12,52 @@ const Contact = () => {
         message: ""
     };
     const [emailDetails, setEmailDetails] = useState(defaultEmail);
+    const [isLoading, setLoading] = useState(false);
     const onSubmit = (e) => {
         e.preventDefault();
-        const message = `${emailDetails.message} from ${emailDetails.email}`;
-        let templateParams = {
-            from_name: emailDetails.name,
-            to_name: 'Naga Mahendra',
-            subject: emailDetails.subject,
-            message_html: message,
+        if(validatePayload()) return;
+        setLoading(true);
+        const payload = {
+            "from" : emailDetails.email,
+            "to" : emailData.mailId,
+            "name": emailDetails.name,
+            "subject": emailDetails.subject,
+            "body": emailDetails.message 
+        }
+        const request = {
+            method: "POST",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify(payload)
         }
 
-        emailjs.send(
-            'service_ek23pwi',
-            'template_nhhamum',
-            templateParams,
-            'user_AfXjNKXhvxxv09w29RrAC'
+        fetch("https://email-service-portfolio.herokuapp.com/emailService/sendMail",
+            request
         ).then((res) => {
             setEmailDetails(defaultEmail);
             showToast("Mail Sent Success");
         }).catch((err) =>{
             showToast("Please Try Again Later");
-        });
-        
+        }).finally(() => {
+            setLoading(false);
+        });  
     };
+
+    const validatePayload = () => {
+        isValid(emailDetails.email) &&
+        isValid(emailDetails.message) &&
+        isValid(emailDetails.subject) &&
+        isValid(emailDetails.name)
+    };
+
+    const isValid = (value) => {
+        return value.length > 0;
+    }
+
     const handleChange = (e) => {
         setEmailDetails({ ...emailDetails, [e.target.name]: e.target.value });
-    }
+    };
     const showToast = (message) => {
         toast(message);
     };
@@ -69,7 +89,7 @@ const Contact = () => {
                         <textarea type="text" name="message" value={emailDetails.message} onChange={handleChange} className="form-control" placeholder="Enter Message" />
                     </div>
                 </div>
-                <Button type="submit" variant="primary" size="sm">Send Mail</Button>
+                <Button disabled={isLoading} type="submit" variant="primary" size="sm">Send Mail</Button>
             </form>
         </div>
     );
