@@ -15,7 +15,7 @@ function App() {
   const [routerState, setRouterState] = useState(defaultState);
   useEffect(() => {
     setRouterState({ ...defaultState, about: true });
-  }, [])
+  }, []);
   return (
     <div>
       <div>

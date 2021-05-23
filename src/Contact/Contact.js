@@ -15,7 +15,7 @@ const Contact = () => {
     const [isLoading, setLoading] = useState(false);
     const onSubmit = (e) => {
         e.preventDefault();
-        if(validatePayload()) return;
+        if(!validatePayload()) return;
         setLoading(true);
         const payload = {
             "from" : emailDetails.email,
@@ -44,16 +44,13 @@ const Contact = () => {
         });  
     };
 
-    const validatePayload = () => {
+    const validatePayload = () =>
         isValid(emailDetails.email) &&
         isValid(emailDetails.message) &&
         isValid(emailDetails.subject) &&
-        isValid(emailDetails.name)
-    };
+        isValid(emailDetails.name);
 
-    const isValid = (value) => {
-        return value.length > 0;
-    }
+    const isValid = (value) => value.length > 0;
 
     const handleChange = (e) => {
         setEmailDetails({ ...emailDetails, [e.target.name]: e.target.value });
